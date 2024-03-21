@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+        body {
+            background-color: rgb(133, 118, 118);
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        .saat-container {
+            text-align: center;
+            margin-top: 50vh;
+            transform: translateY(-50%);
+            border: 2px solid #333;
+            border-radius: 10px;
+            padding: 10px;
+            background-color: #565454;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .saat {
+            font-size: 4em;
+            color: #333;
+        }
+
+        .ayirici {
+            font-size: 1em;
+            color: #333;
+            margin: 0 10px;
+        }
+
+        .bipsesi {
+            display: none;
+        }
+
+        button.start {
+            position: absolute;
+            color: rgb(36, 36, 36);
+            font-size: 20px;
+            font-style: italic;
+            background-color: #565454;
+            border-style:dashed;
+            border-radius: 200px;
+            width: 100px;
+            height: 100px;
+            top: 70%;
+            left: 41%;
+            transform: translate(-50%, -50%);
+        }
+        
+        button.reset {
+            position: absolute;
+            color: rgb(36, 36, 36);
+            font-size: 20px;
+            font-style: italic;
+            background-color: #565454;
+            border-style:dashed;
+            border-radius: 100px;
+            width: 100px;
+            height: 100px;
+            top: 70%;
+            right: 35%;
+            transform: translate(-50%, -50%);
+        }
+        
+        button.stop {
+            position: absolute;
+            color: rgb(36, 36, 36);
+            font-style: italic;
+            font-size: 20px;
+            background-color: #565454;
+            border-style:dashed;
+            border-radius: 100px;
+            width: 100px;
+            height: 100px;
+            top: 70%;
+            right: 45%;
+            transform: translate(-50%, -50%);
+        }
+        h1{
+            font-family: 'Orbitron', sans-serif;
+            text-align: center;
+           
+        }
+        
+        
+    </style>
+
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <H1>SAYAÇ UYGULAMASI</H1>
+    
+    <div class="saat-container">
+        <div class="saat">
+            <span id="saat">00</span>
+            <span class="ayirici">:</span>
+            <span id="dakika">00</span>
+            <span class="ayirici">:</span>
+            <span id="saniye">00</span>
+        </div>
+    </div>
+
+    <audio id="bipsesi" class="bipsesi" src="bip.mp3"></audio>
+    <button class="start" onclick="startClock()">Başlat</button>
+    <button class="stop" onclick="stopClock()">Durdur</button>
+    <button class="reset" onclick="resetClock()">Sıfırla</button>
+
+    <script type="text/javascript">
+        let timer;
+        let sayac = 0;
+
+        function startClock() {
+            timer = setInterval(saat, 1000);
+        }
+
+        function stopClock() {
+            clearInterval(timer);
+        }
+
+        function resetClock() {
+            clearInterval(timer);
+            document.getElementById('saat').innerText = '00';
+            document.getElementById('dakika').innerText = '00';
+            document.getElementById('saniye').innerText = '00';
+            sayac = 0;
+        }
+
+        function saat() {
+            let clockElement = document.getElementById('saat');
+            let minuteElement = document.getElementById('dakika');
+            let secondElement = document.getElementById('saniye');
+            let second = sayac;
+
+            function padding2Left(value) {
+                if (value < 10)
+                    return `0${value}`;
+                return `${value}`;
+            }
+
+            function getRandomColor() {
+                const red = Math.floor(Math.random() * 256);
+                const green = Math.floor(Math.random() * 256);
+                const blue = Math.floor(Math.random() * 256);
+                return `rgb(${red}, ${green}, ${blue})`;
+            }
+
+            function runPerSecond() {
+                if (second >= 86400) {
+                    second = 0;
+                }
+
+                const hourAsString = padding2Left(Math.floor(second / 3600) % 24);
+                const minuteAsString = padding2Left(Math.floor(second / 60) % 60);
+                const secondAsString = padding2Left(second % 60);
+
+                clockElement.style.color = getRandomColor();
+                minuteElement.style.color = getRandomColor();
+                secondElement.style.color = getRandomColor();
+
+                clockElement.innerHTML = hourAsString;
+                minuteElement.innerHTML = minuteAsString;
+                secondElement.innerHTML = secondAsString;
+
+                if (second % 60 == 0) {
+                    document.getElementById("bipsesi").play();
+                }
+
+                second++;
+                sayac = second;
+            }
+            runPerSecond();
+        }
+    </script>
+</body>
+
+</html>
