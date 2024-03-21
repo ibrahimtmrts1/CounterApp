@@ -48,6 +48,10 @@
             left: 41%;
             transform: translate(-50%, -50%);
         }
+        button.start:active {
+            transform: translate(-50%, -50%) scale(0.9); /* Küçültme efekti */
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); /* Gölgelendirme */
+        }
         
         button.reset {
             position: absolute;
@@ -63,6 +67,10 @@
             right: 35%;
             transform: translate(-50%, -50%);
         }
+        button.reset:active {
+            transform: translate(-50%, -50%) scale(0.9); /* Küçültme efekti */
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); /* Gölgelendirme */
+        }
         
         button.stop {
             position: absolute;
@@ -77,6 +85,10 @@
             top: 70%;
             right: 45%;
             transform: translate(-50%, -50%);
+        }
+        button.stop:active {
+            transform: translate(-50%, -50%) scale(0.9); /* Küçültme efekti */
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); /* Gölgelendirme */
         }
         h1{
             font-family: 'Orbitron', sans-serif;
@@ -113,8 +125,9 @@
         let sayac = 0;
 
         function startClock() {
-            timer = setInterval(saat, 1000);
-        }
+            clearInterval(timer); 
+            timer = setInterval(saat, 1000); 
+}   
 
         function stopClock() {
             clearInterval(timer);
