@@ -8,23 +8,22 @@
             font-family: 'Orbitron', sans-serif;
         }
 
-        .saat-container {
+        h1{
             text-align: center;
+        }
+        .saat{
             margin-top: 40vh;
-            transform: translateY(-50%);
-            border: 2px solid #333;
+            border: 10px solid #333;
             border-radius: 10px;
             padding: 10px;
             background-color: #565454;
             background-size: cover;
-            
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-
-        .saat {
+            text-align: center;
             font-size: 4em;
             color: #333;
         }
+
+
 
         .ayirici {
             font-size: 1em;
@@ -33,7 +32,7 @@
         }
 
         .bipsesi {
-            display: none;
+            display: flex;
         }
 
         button {
@@ -42,39 +41,29 @@
             font-style: italic;
             background-color: #565454;
             border-style: dashed;
+            border-radius: 200px;
             width: 100px;
             height: 100px;
-            border-radius: 50%;
-            position: fixed;
-            transform: translate(-50%, -50%);
-            max-width: 990px;
+            margin: 0; /* Butonların margin'ını sıfırlıyoruz */
         }
-
-        button.start {
-            top: 70%;
-            left: 10%;
+        
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
         }
+        
+        .butonlar{
+            margin-top: 50px; 
+            text-align: center;
+            justify-content: space-between;
+            text-align: center;
+            
 
-        button.reset {
-            top: 70%;
-            right: 10%;
         }
-
-        button.stop {
-            top: 70%;
-            left: 50%;
-        }
-
-        @media only screen and (max-width: 600px) {
-            /* Küçük ekranlar için stiller */
-            .saat-container {
-                margin-top: 20vh;
-            }
-
-            button {
-                font-size: 16px;
-            }
-        }
+        
     </style>
 
     <link href="https://fonts.googleapis.com/css2?family=Orbitron&display=swap" rel="stylesheet">
@@ -83,7 +72,6 @@
 <body>
     <H1>SAYAÇ UYGULAMASI</H1>
 
-    <div class="saat-container">
         <div class="saat">
             <span id="saat">00</span>
             <span class="ayirici">:</span>
@@ -91,12 +79,13 @@
             <span class="ayirici">:</span>
             <span id="saniye">00</span>
         </div>
-    </div>
 
-    <audio id="bipsesi" class="bipsesi" src="bip.mp3"></audio>
-    <button class="start" onclick="startClock()">Başlat</button>
-    <button class="stop" onclick="stopClock()">Durdur</button>
-    <button class="reset" onclick="resetClock()">Sıfırla</button>
+    <div class="butonlar">
+        <audio id="bipsesi" class="bipsesi" src="bip.mp3"></audio>
+        <button class="start" onclick="startClock()">Başlat</button>
+        <button class="stop" onclick="stopClock()">Durdur</button>
+        <button class="reset" onclick="resetClock()">Sıfırla</button>
+    </div>
 
     <script type="text/javascript">
         let timer;
