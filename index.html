@@ -88,7 +88,10 @@
     <div class="row justify-content-around">
         <div class="col-md">
             <div class="kutu saatKutu">
-                <div class="saat" id="saatKutu"></div>
+                <div class="saat" id="saatKutu">
+                    <img id="saat-onlar" src="/0.svg" alt="dakika-onlar"  />
+                    <img id="saat-birler" src="/0.svg" alt="dakika-birler />
+                </div>
             </div>
         </div>
         <div class="col-md">
@@ -98,7 +101,10 @@
         </div>
         <div class="col-md">
             <div class="kutu dakikaKutu">
-                <div class="dakika" id="dakikaKutu"></div>
+                <div class="dakika" id="dakikaKutu">
+                    <img id="dakika-onlar" src="/0.svg" alt="dakika-onlar"  />
+                    <img id="dakika-birler" src="/0.svg" alt="dakika-birler />
+                </div>
             </div>
         </div>
         <div class="col-md">
@@ -108,7 +114,11 @@
         </div>
         <div class="col-md">
             <div class="kutu saniyeKutu">
-                <div class="saniye" id="saniyeKutu"></div>
+                <div class="saniye" id="saniyeKutu">
+                    <img id="saniye-onlar" src="/0.svg" alt="saniye-onlar"  />
+                    <img id="saniye-birler" src="/0.svg" alt="saniye-birler />
+
+                </div>
             </div>
         </div>
     </div>
@@ -176,14 +186,29 @@
             let hour = Math.floor(sayac / 3600) % 24;
             let minute = Math.floor(sayac / 60) % 60;
             let second = sayac % 60;
+
+            let hourString = String(hour).padStart(2, '0');
+            let minuteString = String(minute).padStart(2, '0');
+            let secondString = String(second).padStart(2, '0');
+
+            console.log(document.getElementById('saniye-birler').src);
+
+            document.getElementById('saniye-onlar').src="${secondString[0]}.svg";
+            document.getElementById('saniye-birler').src="${secondString[1]}.svg";
+
+            document.getElementById('dakika-onlar').src="${minuteString[0]}.svg";
+            document.getElementById('dakika-birler').src="${minuteString[1]}.svg";
+
+            document.getElementById('saat-onlar').src="${hourString[0]}.svg";
+            document.getElementById('saat-birler').src="${hourString[1]}.svg";
             
-            let saatHTML = `<img src="${String(hour).padStart(2, '0')[0]}.svg" alt="${hour}"><img src="${String(hour).padStart(2, '0')[1]}.svg" alt="${hour}">`;
-            let dakikaHTML = `<img src="${String(minute).padStart(2, '0')[0]}.svg" alt="${minute}"><img src="${String(minute).padStart(2, '0')[1]}.svg" alt="${minute}">`;
-            let saniyeHTML = `<img src="${String(second).padStart(2, '0')[0]}.svg" alt="${second}"><img src="${String(second).padStart(2, '0')[1]}.svg" alt="${second}">`;
+            #let saatHTML = `<img src="${String(hour).padStart(2, '0')[0]}.svg" alt="${hour}"><img src="${String(hour).padStart(2, '0')[1]}.svg" alt="${hour}">`;
+            #let dakikaHTML = `<img src="${String(minute).padStart(2, '0')[0]}.svg" alt="${minute}"><img src="${String(minute).padStart(2, '0')[1]}.svg" alt="${minute}">`;
+            #let saniyeHTML = `<img src="${String(second).padStart(2, '0')[0]}.svg" alt="${second}"><img src="${String(second).padStart(2, '0')[1]}.svg" alt="${second}">`;
             
-            document.getElementById('saatKutu').innerHTML = saatHTML;
-            document.getElementById('dakikaKutu').innerHTML = dakikaHTML;
-            document.getElementById('saniyeKutu').innerHTML = saniyeHTML;
+            #document.getElementById('saatKutu').innerHTML = saatHTML;
+            #document.getElementById('dakikaKutu').innerHTML = dakikaHTML;
+            #document.getElementById('saniyeKutu').innerHTML = saniyeHTML;
 
             document.querySelector('.saatKutu').style.backgroundColor = getRandomColor();
             document.querySelector('.dakikaKutu').style.backgroundColor = getRandomColor();
