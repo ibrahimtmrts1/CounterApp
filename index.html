@@ -173,9 +173,9 @@
         }
 
         function saat() {
-            let hour = String(Math.floor(sayac / 3600) % 24);
-            let minute = String(Math.floor(sayac / 60) % 60);
-            let second = String(sayac % 60);
+            let hour = String(Math.floor(sayac / 3600) % 24).padStart(2, '0');
+            let minute = String(Math.floor(sayac / 60) % 60).padStart(2, '0');
+            let second = String(sayac % 60).padStart(2, '0');
 
             let saatHTML = `<img src="${hour[0]}.svg" alt="${hour[0]}"><img src="${hour[1]}.svg" alt="${hour[1]}">`;
             let dakikaHTML = `<img src="${minute[0]}.svg" alt="${minute[0]}"><img src="${minute[1]}.svg" alt="${hour[1]}">`;
