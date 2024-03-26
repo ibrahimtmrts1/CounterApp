@@ -10,12 +10,10 @@
         background-color: rgb(133, 118, 118);
         font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
     }
-
     h1 {
         text-align: center;
         font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
     }
-
     .kutu {
         height: 150px;
         width: 150px;
@@ -27,18 +25,15 @@
         border: blanchedalmond;
         border-radius: 20%;
     }
-
     .ayirici {
         align-items: center;
         justify-content: center;
         color: #333;
     }
-
     .butonlar {
-        margin-top: 20px;
+        margin-top: 50px;
         text-align: center;
     }
-
     button {
         color: rgb(36, 36, 36);
         font-size: 20px;
@@ -50,14 +45,12 @@
         height: 100px;
         font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
         cursor: pointer;
-        margin: 10px; /* Boşlukları artırdık */
+        margin: 0;
     }
-
     button.disabled {
         opacity: 0.5;
         cursor: not-allowed;
     }
-
     .container {
         display: flex;
         flex-direction: column;
@@ -65,7 +58,6 @@
         justify-content: center;
         min-height: 100vh;
     }
-
     .row {
         display: flex;
         justify-content: center;
@@ -74,17 +66,10 @@
         align-items: center;
         flex-wrap: nowrap; /* Yatayda sığdırmak için */
     }
-
     @media (max-width: 576px) { /* Mobil cihazlar için */
         .kutu {
-            height: 100px; /* Daha küçük kutu yüksekliği */
-            width: 100px; /* Daha küçük kutu genişliği */
-        }
-        
-        button {
-            width: 80px; /* Daha küçük buton genişliği */
-            height: 80px; /* Daha küçük buton yüksekliği */
-            font-size: 16px; /* Daha küçük font boyutu */
+            height: 80px; /* Daha küçük kutu yüksekliği */
+            width: 80px; /* Daha küçük kutu genişliği */
         }
     }
 </style>
@@ -93,7 +78,7 @@
 <div class="container text-center">
     <h1>SAYAÇ UYGULAMASI</h1>
     <div class="row justify-content-around">
-        <div class="col-md">
+        <div class="col">
             <div class="kutu saatKutu">
                 <div class="saat" id="saatKutu">
                     <img id="saat-onlar" src="/0.svg" alt="dakika-onlar"  />
@@ -101,12 +86,12 @@
                 </div>
             </div>
         </div>
-        <div class="col-md">
+        <div class="col">
             <div class="ayirici">
                 <img src="/ikinokta.svg" alt="ikinokta.svg">
             </div>
         </div>
-        <div class="col-md">
+        <div class="col">
             <div class="kutu dakikaKutu">
                 <div class="dakika" id="dakikaKutu">
                     <img id="dakika-onlar" src="/0.svg" alt="dakika-onlar"  />
@@ -114,12 +99,12 @@
                 </div>
             </div>
         </div>
-        <div class="col-md">
+        <div class="col">
             <div class="ayirici">
                 <img src="/ikinokta.svg" alt="ikinokta.svg">
             </div>
         </div>
-        <div class="col-md">
+        <div class="col">
             <div class="kutu saniyeKutu">
                 <div class="saniye" id="saniyeKutu">
                     <img id="saniye-onlar" src="/0.svg" alt="saniye-onlar"  />
@@ -128,6 +113,7 @@
             </div>
         </div>
     </div>
+
     <div class="butonlar">
         <audio id="bipsesi" class="bipsesi" src="bip.mp3"></audio>
         <button id="start" class="start" onclick="startClock()">Başlat</button>
