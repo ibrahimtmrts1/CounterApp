@@ -173,14 +173,14 @@
         }
 
         function saat() {
-            let hour = String(Math.floor(sayac / 3600) % 24).padStart(2, '0');
-            let minute = String(Math.floor(sayac / 60) % 60).padStart(2, '0');
-            let second = String(sayac % 60).padStart(2, '0');
-
-            let saatHTML = `<img src="${hour[0]}.svg" alt="${hour[0]}"><img src="${hour[1]}.svg" alt="${hour[1]}">`;
-            let dakikaHTML = `<img src="${minute[0]}.svg" alt="${minute[0]}"><img src="${minute[1]}.svg" alt="${hour[1]}">`;
-            let saniyeHTML = `<img src="${second[0]}.svg" alt="${second[0]}"><img src="${second[1]}.svg" alt="${second[1]}">`;
-
+            let hour = Math.floor(sayac / 3600) % 24;
+            let minute = Math.floor(sayac / 60) % 60;
+            let second = sayac % 60;
+            
+            let saatHTML = `<img src="${String(hour).padStart(2, '0')[0]}.svg" alt="${hour}"><img src="${String(hour).padStart(2, '0')[1]}.svg" alt="${hour}">`;
+            let dakikaHTML = `<img src="${String(minute).padStart(2, '0')[0]}.svg" alt="${minute}"><img src="${String(minute).padStart(2, '0')[1]}.svg" alt="${minute}">`;
+            let saniyeHTML = `<img src="${String(second).padStart(2, '0')[0]}.svg" alt="${second}"><img src="${String(second).padStart(2, '0')[1]}.svg" alt="${second}">`;
+            
             document.getElementById('saatKutu').innerHTML = saatHTML;
             document.getElementById('dakikaKutu').innerHTML = dakikaHTML;
             document.getElementById('saniyeKutu').innerHTML = saniyeHTML;
@@ -198,3 +198,4 @@
     </script>
 </body>
 </html>
+
