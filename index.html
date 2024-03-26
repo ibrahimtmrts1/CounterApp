@@ -35,7 +35,7 @@
     }
 
     .butonlar {
-        margin-top: 50px;
+        margin-top: 20px;
         text-align: center;
     }
 
@@ -50,7 +50,7 @@
         height: 100px;
         font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
         cursor: pointer;
-        margin: 0;
+        margin: 10px; /* Boşlukları artırdık */
     }
 
     button.disabled {
@@ -74,10 +74,17 @@
         align-items: center;
         flex-wrap: nowrap; /* Yatayda sığdırmak için */
     }
+
     @media (max-width: 576px) { /* Mobil cihazlar için */
         .kutu {
-            height: 80px; /* Daha küçük kutu yüksekliği */
-            width: 80px; /* Daha küçük kutu genişliği */
+            height: 100px; /* Daha küçük kutu yüksekliği */
+            width: 100px; /* Daha küçük kutu genişliği */
+        }
+        
+        button {
+            width: 80px; /* Daha küçük buton genişliği */
+            height: 80px; /* Daha küçük buton yüksekliği */
+            font-size: 16px; /* Daha küçük font boyutu */
         }
     }
 </style>
@@ -88,7 +95,10 @@
     <div class="row justify-content-around">
         <div class="col-md">
             <div class="kutu saatKutu">
-                <div class="saat" id="saatKutu"></div>
+                <div class="saat" id="saatKutu">
+                    <img id="saat-onlar" src="/0.svg" alt="dakika-onlar"  />
+                    <img id="saat-birler" src="/0.svg" alt="dakika-birler" />
+                </div>
             </div>
         </div>
         <div class="col-md">
@@ -98,7 +108,10 @@
         </div>
         <div class="col-md">
             <div class="kutu dakikaKutu">
-                <div class="dakika" id="dakikaKutu"></div>
+                <div class="dakika" id="dakikaKutu">
+                    <img id="dakika-onlar" src="/0.svg" alt="dakika-onlar"  />
+                    <img id="dakika-birler" src="/0.svg" alt="dakika-birler" />
+                </div>
             </div>
         </div>
         <div class="col-md">
@@ -108,7 +121,10 @@
         </div>
         <div class="col-md">
             <div class="kutu saniyeKutu">
-                <div class="saniye" id="saniyeKutu"></div>
+                <div class="saniye" id="saniyeKutu">
+                    <img id="saniye-onlar" src="/0.svg" alt="saniye-onlar"  />
+                    <img id="saniye-birler" src="/0.svg" alt="saniye-birler "/>
+                </div>
             </div>
         </div>
     </div>
@@ -127,9 +143,9 @@
         document.querySelector('.saatKutu').style.backgroundColor = getRandomColor();
         document.querySelector('.dakikaKutu').style.backgroundColor = getRandomColor();
         document.querySelector('.saniyeKutu').style.backgroundColor = getRandomColor();
-        document.getElementById('saatKutu').innerHTML = '<img src="0.svg" alt="0.svg">'+'<img src="0.svg" alt="0.svg">';
-        document.getElementById('dakikaKutu').innerHTML = '<img src="0.svg" alt="0.svg">'+'<img src="0.svg" alt="0.svg">';
-        document.getElementById('saniyeKutu').innerHTML = '<img src="0.svg" alt="0.svg">'+'<img src="0.svg" alt="0.svg">';
+        //document.getElementById('saatKutu').innerHTML = '<img src="0.svg" alt="0.svg">'+'<img src="0.svg" alt="0.svg">';
+       // document.getElementById('dakikaKutu').innerHTML = '<img src="0.svg" alt="0.svg">'+'<img src="0.svg" alt="0.svg">';
+        //document.getElementById('saniyeKutu').innerHTML = '<img src="0.svg" alt="0.svg">'+'<img src="0.svg" alt="0.svg">';
 
 
 
@@ -176,14 +192,25 @@
             let hour = Math.floor(sayac / 3600) % 24;
             let minute = Math.floor(sayac / 60) % 60;
             let second = sayac % 60;
-            
-            let saatHTML = `<img src="${String(hour).padStart(2, '0')[0]}.svg" alt="${hour}"><img src="${String(hour).padStart(2, '0')[1]}.svg" alt="${hour}">`;
-            let dakikaHTML = `<img src="${String(minute).padStart(2, '0')[0]}.svg" alt="${minute}"><img src="${String(minute).padStart(2, '0')[1]}.svg" alt="${minute}">`;
-            let saniyeHTML = `<img src="${String(second).padStart(2, '0')[0]}.svg" alt="${second}"><img src="${String(second).padStart(2, '0')[1]}.svg" alt="${second}">`;
-            
-            document.getElementById('saatKutu').innerHTML = saatHTML;
-            document.getElementById('dakikaKutu').innerHTML = dakikaHTML;
-            document.getElementById('saniyeKutu').innerHTML = saniyeHTML;
+
+            let hourString = String(hour).padStart(2, '0');
+            let minuteString = String(minute).padStart(2, '0');
+            let secondString = String(second).padStart(2, '0');
+
+            console.log(document.getElementById('saniye-birler').src);
+
+            document.getElementById('saniye-onlar').src=secondString[0]+".svg";
+            document.getElementById('saniye-birler').src=secondString[1]+".svg";
+
+            document.getElementById('dakika-onlar').src=minuteString[0]+".svg";
+            document.getElementById('dakika-birler').src=minuteString[1]+".svg";
+
+            document.getElementById('saat-onlar').src=hourString[0]+".svg";
+            document.getElementById('saat-birler').src=hourString[1]+".svg";
+                        
+            //document.getElementById('saatKutu').innerHTML = saatHTML;
+            //document.getElementById('dakikaKutu').innerHTML = dakikaHTML;
+            //document.getElementById('saniyeKutu').innerHTML = saniyeHTML;
 
             document.querySelector('.saatKutu').style.backgroundColor = getRandomColor();
             document.querySelector('.dakikaKutu').style.backgroundColor = getRandomColor();
@@ -198,4 +225,3 @@
     </script>
 </body>
 </html>
-
