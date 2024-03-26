@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SAYAÇ UYGULAMASI</title>
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+<style>
+    body {
+        background-color: rgb(133, 118, 118);
+        font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    }
+
+    h1 {
+        text-align: center;
+        font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    }
+
+    .kutu {
+        height: 150px;
+        width: 150px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        align-self: center;
+        margin: 0;
+        border: blanchedalmond;
+        border-radius: 20%;
+    }
+
+    .ayirici {
+        align-items: center;
+        justify-content: center;
+        color: #333;
+    }
+
+    .butonlar {
+        margin-top: 50px;
+        text-align: center;
+    }
+
+    button {
+        color: rgb(36, 36, 36);
+        font-size: 20px;
+        font-style: italic;
+        background-color: #565454;
+        border-style: dashed;
+        border-radius: 200px;
+        width: 100px;
+        height: 100px;
+        font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+        cursor: pointer;
+        margin: 0;
+    }
+
+    button.disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+    }
+
+    .container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+    }
+
+    .row {
+        display: flex;
+        justify-content: center;
+        margin-top: 20px;
+        margin-bottom: 20px;
+        align-items: center;
+        flex-wrap: nowrap; /* Yatayda sığdırmak için */
+    }
+    @media (max-width: 576px) { /* Mobil cihazlar için */
+        .kutu {
+            height: 80px; /* Daha küçük kutu yüksekliği */
+            width: 80px; /* Daha küçük kutu genişliği */
+        }
+    }
+</style>
+</head>
+<body>
+<div class="container text-center">
+    <h1>SAYAÇ UYGULAMASI</h1>
+    <div class="row justify-content-around">
+        <div class="col-md">
+            <div class="kutu saatKutu">
+                <div class="saat" id="saatKutu"></div>
+            </div>
+        </div>
+        <div class="col-md">
+            <div class="ayirici">
+                <img src="/ikinokta.svg" alt="ikinokta.svg">
+            </div>
+        </div>
+        <div class="col-md">
+            <div class="kutu dakikaKutu">
+                <div class="dakika" id="dakikaKutu"></div>
+            </div>
+        </div>
+        <div class="col-md">
+            <div class="ayirici">
+                <img src="/ikinokta.svg" alt="ikinokta.svg">
+            </div>
+        </div>
+        <div class="col-md">
+            <div class="kutu saniyeKutu">
+                <div class="saniye" id="saniyeKutu"></div>
+            </div>
+        </div>
+    </div>
+    <div class="butonlar">
+        <audio id="bipsesi" class="bipsesi" src="bip.mp3"></audio>
+        <button id="start" class="start" onclick="startClock()">Başlat</button>
+        <button id="stop" class="stop" onclick="stopClock()">Durdur</button>
+        <button id="reset" class="reset" onclick="resetClock()">Sıfırla</button>
+    </div>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script>
+        document.querySelector('.saatKutu').style.backgroundColor = getRandomColor();
+        document.querySelector('.dakikaKutu').style.backgroundColor = getRandomColor();
+        document.querySelector('.saniyeKutu').style.backgroundColor = getRandomColor();
+        document.getElementById('saatKutu').innerHTML = '<img src="0.svg" alt="0.svg">'+'<img src="0.svg" alt="0.svg">';
+        document.getElementById('dakikaKutu').innerHTML = '<img src="0.svg" alt="0.svg">'+'<img src="0.svg" alt="0.svg">';
+        document.getElementById('saniyeKutu').innerHTML = '<img src="0.svg" alt="0.svg">'+'<img src="0.svg" alt="0.svg">';
+
+
+
+        let timer;
+        let sayac = 0;
+        const startButton = document.getElementById('start');
+        const stopButton = document.getElementById('stop');
+        const resetButton = document.getElementById('reset');
+
+        function startClock() {
+            clearInterval(timer);
+            timer = setInterval(saat, 1000);
+            startButton.disabled = true;
+            stopButton.disabled = false;
+            resetButton.disabled = true;
+        }
+
+        function stopClock() {
+            clearInterval(timer);
+            startButton.disabled = false;
+            stopButton.disabled = true;
+            resetButton.disabled = false;
+        }
+
+        function resetClock() {
+            clearInterval(timer);
+            document.getElementById('saatKutu').innerHTML = '';
+            document.getElementById('dakikaKutu').innerHTML = '';
+            document.getElementById('saniyeKutu').innerHTML = '';
+            sayac = 0;
+            startButton.disabled = false;
+            stopButton.disabled = true;
+            resetButton.disabled = true;
+        }
+
+        function getRandomColor() {
+            const r = Math.floor(Math.random() * 256);
+            const g = Math.floor(Math.random() * 256);
+            const b = Math.floor(Math.random() * 256);
+            return `rgb(${r}, ${g}, ${b})`;
+        }
+
+        function saat() {
+            let hour = String(Math.floor(sayac / 3600) % 24).padStart(2, '0');
+            let minute = String(Math.floor(sayac / 60) % 60).padStart(2, '0');
+            let second = String(sayac % 60).padStart(2, '0');
+
+            let saatHTML = `<img src="${hour[0]}.svg" alt="${hour[0]}"><img src="${hour[1]}.svg" alt="${hour[1]}">`;
+            let dakikaHTML = `<img src="${minute[0]}.svg" alt="${minute[0]}"><img src="${minute[1]}.svg" alt="${hour[1]}">`;
+            let saniyeHTML = `<img src="${second[0]}.svg" alt="${second[0]}"><img src="${second[1]}.svg" alt="${second[1]}">`;
+
+            document.getElementById('saatKutu').innerHTML = saatHTML;
+            document.getElementById('dakikaKutu').innerHTML = dakikaHTML;
+            document.getElementById('saniyeKutu').innerHTML = saniyeHTML;
+
+            document.querySelector('.saatKutu').style.backgroundColor = getRandomColor();
+            document.querySelector('.dakikaKutu').style.backgroundColor = getRandomColor();
+            document.querySelector('.saniyeKutu').style.backgroundColor = getRandomColor();
+
+            if (second === '00') {
+                document.getElementById("bipsesi").play();
+            }
+
+            sayac++;
+        }
+    </script>
+</body>
+</html>
